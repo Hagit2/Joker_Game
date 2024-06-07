@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+
+
+
+
+    <title>Card Game</title>
+    <style>
+        .card {
+            width: 100px;
+            height: 150px;
+            margin-right: 10px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            cursor: pointer;
+        }
+
+        .player-hand {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .pot {
+            width: 100px;
+            height: 150px;
+            margin-top: 20px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            cursor: pointer;
+        }
+
+        .draw-button {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .card {
+            width: 100px;
+            height: 150px;
+            margin-right: 10px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            cursor: pointer;
+        }
+
+        .player-hand {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .pot {
+            width: 100px;
+            height: 150px;
+            margin-top: 20px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            cursor: pointer;
+        }
+
+        .draw-button {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+        <body>
+            <div class="player-hand"></div>
+            <div class="pot"></div>
+            <button class="draw-button">Draw</button>
+
+
+
+
+
+
+
+            <script>
+
+                let deck = [
+                    { rank: 'Ace', suit: 'Hearts' },
+                    { rank: '2', suit: 'Hearts' },
+                    { rank: '3', suit: 'Hearts' },
+                    { rank: '4', suit: 'Hearts' },
+                    { rank: '5', suit: 'Hearts' },
+                    { rank: '6', suit: 'Hearts' },
+                    { rank: '7', suit: 'Hearts' },
+                    { rank: '8', suit: 'Hearts' },
+                    { rank: '9', suit: 'Hearts' },
+                    { rank: '10', suit: 'Hearts' },
+                    { rank: 'Jack', suit: 'Hearts' },
+                    { rank: 'Queen', suit: 'Hearts' },
+                    { rank: 'King', suit: 'Hearts' },
+                    { rank: 'Ace', suit: 'Diamonds' },
+                    { rank: '2', suit: 'Diamonds' },
+                    { rank: '3', suit: 'Diamonds' },
+                    { rank: '4', suit: 'Diamonds' },
+                    { rank: '5', suit: 'Diamonds' },
+                    { rank: '6', suit: 'Diamonds' },
+                    { rank: '7', suit: 'Diamonds' },
+                    { rank: '8', suit: 'Diamonds' },
+                    { rank: '9', suit: 'Diamonds' },
+                    { rank: '10', suit: 'Diamonds' },
+                    { rank: 'Jack', suit: 'Diamonds' },
+                    { rank: 'Queen', suit: 'Diamonds' },
+                    { rank: 'King', suit: 'Diamonds' },
+                    { rank: 'Ace', suit: 'Clubs' },
+                    { rank: '2', suit: 'Clubs' },
+                    { rank: '3', suit: 'Clubs' },
+                    { rank: '4', suit: 'Clubs' },
+                    { rank: '5', suit: 'Clubs' },
+                    { rank: '6', suit: 'Clubs' },
+                    { rank: '7', suit: 'Clubs' },
+                    { rank: '8', suit: 'Clubs' },
+                    { rank: '9', suit: 'Clubs' },
+                    { rank: '10', suit: 'Clubs' },
+                    { rank: 'Jack', suit: 'Clubs' },
+                    { rank: 'Queen', suit: 'Clubs' },
+                    { rank: 'King', suit: 'Clubs' },
+                    { rank: 'Ace', suit: 'Spades' },
+                    { rank: '2', suit: 'Spades' },
+                    { rank: '3', suit: 'Spades' },
+                    { rank: '4', suit: 'Spades' },
+                    { rank: '5', suit: 'Spades' },
+                    { rank: '6', suit: 'Spades' },
+                    { rank: '7', suit: 'Spades' },
+                    { rank: '8', suit: 'Spades' },
+                    { rank: '9', suit: 'Spades' },
+                    { rank: '10', suit: 'Spades' },
+                    { rank: 'Jack', suit: 'Spades' },
+                    { rank: 'Queen', suit: 'Spades' },
+                    { rank: 'King', suit: 'Spades' }
+                ];
+                let pot = [];
+                let playerHand = [];
+
+                function drawCard() {
+                    // Draw a card from the deck
+                    let card = deck.pop();
+                    // Add the card to the player's hand
+                    playerHand.push(card);
+                    // Update the display of the player's hand
+                    updatePlayerHand();
+                    // Add the card to the pot
+                    pot.push(card);
+                    // Update the display of the pot
+                    updatePot();
+                }
+
+                function updatePlayerHand() {
+                    let playerHandElement = document.querySelector('.player-hand');
+                    playerHandElement.innerHTML = '';
+                    for (let i = 0; i < playerHand.length; i++) {
+                        let cardElement = document.createElement('div');
+                        cardElement.classList.add('card');
+                        cardElement.dataset.index = i;
+                        cardElement.style.backgroundImage = `url('${playerHand[i].rank}-of-${playerHand[i].suit}.png')`;
+                        cardElement.addEventListener('click', function () {
+                            // Switch the card with the top card of the pot
+                            let index = parseInt(this.dataset.index);
+                            let drawnCard = pot.pop();
+                            pot.push(playerHand[index]);
+                            playerHand[index] = drawnCard;
+                            updatePlayerHand();
+                            updatePot();
+                        });
+                        playerHandElement.appendChild(cardElement);
+                    }
+                }
+
+                function updatePot() {
+                    let potElement = document.querySelector('.pot');
+                    potElement.innerHTML = '';
+                    if (pot.length > 0) {
+                        let cardElement = document.createElement('div');
+                        cardElement.classList.add('card');
+                        cardElement.style.backgroundImage = `url('${pot[pot.length - 1].rank}-of-${pot[pot.length - 1].suit}.png')`;
+                        card</script>
+        </body>
+</html>

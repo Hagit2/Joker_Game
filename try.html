@@ -1,0 +1,70 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Game</title>
+
+    <link href="tryy.css" rel="stylesheet" />
+    <script src="try.js"></script>
+
+</head>
+<body onload="start(13,13)">
+  
+    <!--//טימר-->
+    <div id="timer"></div>
+    <button class="button" onclick="location.href='home_page.html'">home</button>
+    <h1>Computer cards</h1>
+    <div class="game">
+        <div class="player-hand">
+            <h2>Your Cards</h2>
+            <div class="cards">
+
+            </div>
+        </div>
+        <div class="pot">
+
+            <div class="cards" id="main_cards">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="row"><h4>קופה</h4></div>
+                            <div class="row"> <div class="card" id="pot"></div></div>
+                        </div>
+                        <div class="col-4">
+                            <div class="row"><h4>זבל</h4></div>
+                            <div class="row"> <div class="card" id="garbage"></div></div>
+                        </div>
+                        <div class="col-4">
+                            <div class="row"><h4>קלף נוכחי</h4></div>
+                            <div class="row"> <div class="card" id="current"></div></div>
+                        </div>
+
+
+                    </div>
+                    <div></div>
+
+
+
+                </div>
+                <button id="draw-button" >ערבוב הקופה</button>
+            </div>
+
+        </div>
+        <div class="computer-hand">
+            <h2>Computer's Cards</h2>
+            <div class="cards">
+
+            </div>
+        </div>
+    </div>
+    <audio id="musicCheck">
+        <source src="check.mp3" type="audio/mpeg" />
+    </audio>
+
+    <audio id="musicgarbage">
+        <source src="check.mp3" type="audio/mpeg" />
+    </audio>
+   
+</body>
+</html>
